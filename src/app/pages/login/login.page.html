@@ -1,32 +1,53 @@
 <ion-content>
   <div class="flex-center">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title color="success">Reciclica</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item>
-          <ion-label position="floating">Email</ion-label>
-          <ion-input type="email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Password</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
-        <ion-button color="success" size="full" (click)="login()"
-          >LOGIN</ion-button
-        >
-        <ion-button
-          color="success"
-          size="full"
-          fill="clear"
-          (click)="register()"
-          >REGISTER</ion-button
-        >
-        <ion-button color="dark" size="full" fill="clear"
-          >Forgot password ?</ion-button
-        >
-      </ion-card-content>
-    </ion-card>
+    <form [formGroup]="form">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title color="success">Reciclica</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+            <app-error-message *ngIf="form.get('email').touched && form.get('email').errors?.email"
+            [errorMessage]="'Invalid email'"
+            ></app-error-message>
+
+            <app-error-message *ngIf="form.get('email').touched && form.get('email').errors?.required"
+              [errorMessage]="'Email is required'"
+            ></app-error-message>
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+            <app-error-message
+              *ngIf="form.get('password').touched && form.get('password').errors?.required"
+              [errorMessage]="'Password is required'"
+            ></app-error-message>
+          <ion-button
+            color="success"
+            size="full"
+            (click)="login()"
+            [disabled]="!form.valid"
+            >LOGIN</ion-button
+          >
+          <ion-button
+            color="success"
+            size="full"
+            fill="clear"
+            (click)="register()"
+            >REGISTER</ion-button
+          >
+          <ion-button
+            color="dark"
+            size="full"
+            fill="clear"
+            [disabled]="!form.get('email').valid"
+            >Forgot password ?</ion-button
+          >
+        </ion-card-content>
+      </ion-card>
+    </form>
   </div>
 </ion-content>
