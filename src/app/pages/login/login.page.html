@@ -13,8 +13,14 @@
           <ion-label position="floating">Password</ion-label>
           <ion-input type="password"></ion-input>
         </ion-item>
-        <ion-button color="success" size="full">LOGIN</ion-button>
-        <ion-button color="success" size="full" fill="clear"
+        <ion-button color="success" size="full" (click)="login()"
+          >LOGIN</ion-button
+        >
+        <ion-button
+          color="success"
+          size="full"
+          fill="clear"
+          (click)="register()"
           >REGISTER</ion-button
         >
         <ion-button color="dark" size="full" fill="clear"

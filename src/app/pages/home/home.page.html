@@ -30,12 +30,17 @@
     <ion-card-header header>
       <ion-card-subtitle>Last Pick up Call</ion-card-subtitle>
     </ion-card-header>
-    <ion-button footer color="success" fill="clear" size="full"
+    <ion-button
+      (click)="pickupCalls()"
+      footer
+      color="success"
+      fill="clear"
+      size="full"
       >See all..</ion-button
     >
   </app-pickup-call-card>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="add()">
     <ion-fab-button color="success">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

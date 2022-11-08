@@ -27,7 +27,7 @@ describe('LoginPage', () => {
     spyOn(router, 'navigate');
 
     component.login();
-    
+
     expect(router.navigate).toHaveBeenCalledWith(['home']);
   });
 });
