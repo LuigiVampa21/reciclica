@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Reciplica</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list color="success">
+    <ion-item color="success">
+      <ion-avatar slot="start">
+        <img src="assets/images/profile-user.png" alt="user-profile-picture" />
+      </ion-avatar>
+      <ion-label>
+        <h1>Luigi Vampa</h1>
+        <p>Gathered <span class="money">$ 15,000,000.00</span></p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <app-pickup-call-card
+    [hasheader]="true"
+    [hasFooter]="true"
+    status="hold"
+    updatedAt="25/10/2022 15:47"
+    createdAt="25/10/2022"
+  >
+    <ion-card-header header>
+      <ion-card-subtitle>Last Pick up Call</ion-card-subtitle>
+    </ion-card-header>
+    <ion-button footer color="success" fill="clear" size="full"
+      >See all..</ion-button
+    >
+  </app-pickup-call-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="success">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

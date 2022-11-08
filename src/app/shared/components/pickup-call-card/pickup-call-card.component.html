@@ -1,0 +1,32 @@
+<ion-card>
+  <ng-content select="[header]"></ng-content>
+  <ion-card-header *ngIf="hasHeader">
+    <ion-card-subtitle>Last pickup call</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-item lines="none">
+      <ion-icon
+        [name]="statusIcon[status]"
+        slot="start"
+        [color]="statusColor[status]"
+      ></ion-icon>
+      <ion-label>
+        {{ statusArray[status] }}
+        <p>{{ updatedAt }}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>
+        <p>Created on {{ createdAt }}</p>
+        <p *ngIf="notes">{{ notes }}</p>
+      </ion-label>
+    </ion-item>
+    <ion-list *ngIf="amount">
+      <ion-item lines="inset">
+        <ion-icon name="trophy" slot="start" color="success"></ion-icon>
+        <ion-label color="success">${{ amount }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+  <ng-content select="[footer]"></ng-content>
+</ion-card>
