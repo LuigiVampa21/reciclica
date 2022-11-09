@@ -1,5 +1,5 @@
-import { UserRegister } from './../../shared/models/user.model';
 /* eslint-disable */
+import { UserRegister } from './../../shared/models/user.model';
 import { registerSuccess, registerFail, register } from './../../shared/store/register/register.actions';
 import { AuthService } from 'src/app/services/auth.service';
 import { Injectable } from '@angular/core';

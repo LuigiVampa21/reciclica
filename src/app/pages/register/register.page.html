@@ -31,7 +31,7 @@
           [errorMessage]="'Email is required'"
         ></app-error-message>
         <app-error-message
-          *ngIf="form.get('email').touched && form.get('email').errors.email"
+          *ngIf="form.get('email').touched && form.get('email').errors?.email"
           [errorMessage]="'Please enter a valid email'"
         ></app-error-message>
         <ion-item>

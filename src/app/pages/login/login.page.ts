@@ -1,14 +1,12 @@
-import { LoginState } from './../../shared/store/login/LoginState';
-// eslint-disable-next-line max-len
-import { recoverPassword, recoverPasswordSuccess, recoverPasswordFail, loginSuccess, login, loginFail } from './../../shared/store/login/login.actions';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { LoginState } from './../../shared/store/login/LoginState';
+import { recoverPassword, login } from './../../shared/store/login/login.actions';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/store/AppState';
 import { hide, show } from 'src/app/shared/store/loading/loading.actions';
-import { ToastController } from '@ionic/angular';
-import { AuthService } from 'src/app/services/auth.service';
+import { NavController, ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -26,16 +24,14 @@ export class LoginPage implements OnInit, OnDestroy {
               private formBuilder: FormBuilder,
               private store: Store<AppState>,
               private toastController: ToastController,
-              // private authService: AuthService,
+              private navController: NavController,
              ) { }
 
   ngOnInit() {
     this.initForm();
     this.loginStateSub = this.store.select('login')
         .subscribe(loginState => {
-            // this.onIsRecoveringPassword(loginState);
             this.onIsRecoveredPassword(loginState);
-            // this.onIsLoggingIn(loginState);
             this.onIsLoggedIn(loginState);
             this.toggleLoading(loginState);
             this.onError(loginState);
@@ -57,23 +53,11 @@ export class LoginPage implements OnInit, OnDestroy {
     }
   }
 
-  // onIsRecoveringPassword(loginState: LoginState){
-  //   if(loginState.isRecoveringPassword){
-  //   this.authService.recoverEmailPassword(this.form.get('email').value)
-  //       .subscribe(
-  //         result => {
-  //         this.store.dispatch(recoverPasswordSuccess());
-  //       },
-  //          error => {
-  //           this.store.dispatch(recoverPasswordFail({error}));
-  //         });
-  //   }
-  // };
-
   async onIsRecoveredPassword(loginState: LoginState){
     if(loginState.isRecoveredPassword){
     const toaster = await this.toastController.create({
       position: 'bottom',
+      duration: 3000,
       message: 'Recovery email sent',
       color: 'primary'
     });
@@ -85,6 +69,7 @@ export class LoginPage implements OnInit, OnDestroy {
     if(loginState.error){
       const toaster = await this.toastController.create({
         position: 'bottom',
+        duration: 3000,
         message: loginState.error.message,
         color: 'danger'
       });
@@ -92,25 +77,9 @@ export class LoginPage implements OnInit, OnDestroy {
       }
   }
 
-  // onIsLoggingIn(loginState: LoginState){
-  //   if(loginState.isLoggingIn){
-  //     const email = this.form.get('email').value;
-  //     const password = this.form.get('password').value;
-  //     this.authService.onLogin(email, password)
-  //           .subscribe(
-  //             user => {
-  //             this.store.dispatch(loginSuccess({user}));
-  //           },
-  //             error => {
-  //             this.store.dispatch(loginFail({error}));
-  //           }
-  //           );
-  //   }
-  // }
-
   onIsLoggedIn(loginState: LoginState){
     if(loginState.isLoggedIn){
-      this.router.navigate(['home']);
+      this.navController.navigateRoot('home');
     }
   }
 
@@ -123,7 +92,6 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   forgotPassword(){
-    console.log(this.form.get('email').value);
     this.store.dispatch(recoverPassword({email: this.form.get('email').value}));
   }
 

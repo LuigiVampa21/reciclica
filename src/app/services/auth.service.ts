@@ -44,6 +44,11 @@ export class AuthService {
   onRegister(user: UserRegister){
     return new Observable<User>(observer => {
         // .then(() => {
+
+          // if(user.email === 'ntn@ntn.mail'){
+          //   observer.error('email already registered');
+          //   observer.complete();
+          // }
           observer.next(user);
           observer.complete();
         });
@@ -54,5 +59,4 @@ export class AuthService {
     //   });
     // });
   }
-
 }
