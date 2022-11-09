@@ -1,8 +1,8 @@
-import { AppState } from './../../store/loading/AppState';
-import { LoadingState } from './../../store/loading/LoadingState';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { AppState } from '../../store/AppState';
+import { LoadingState } from './../../store/loading/LoadingState';
 
 @Component({
   selector: 'app-loading',

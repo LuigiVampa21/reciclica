@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/shared/store/loading/AppState';
+import { AppState } from 'src/app/shared/store/AppState';
 import { hide, show } from 'src/app/shared/store/loading/loading.actions';
 
 @Component({
@@ -42,7 +42,7 @@ export class LoginPage implements OnInit {
     this.store.dispatch(show());
     setTimeout(() => {
       this.store.dispatch(hide());
-    });
+    }, 3000);
   }
 
 }

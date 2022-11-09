@@ -1,11 +1,9 @@
-import { AppStoreModule } from './store/AppStoreModule';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { PickupCallCardComponent } from './components/pickup-call-card/pickup-call-card.component';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LoadingComponent } from './components/loading/loading.component';
 
 

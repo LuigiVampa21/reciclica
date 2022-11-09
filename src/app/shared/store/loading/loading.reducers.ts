@@ -1,11 +1,10 @@
+import { AppInitialState } from './../AppInitialState';
 /* eslint-disable */
 import { LoadingState } from './LoadingState';
 import { Action, createReducer, on } from '@ngrx/store';
 import { hide, show } from './loading.actions';
 
-const initialState: LoadingState = {
-  show: false
-};
+const initialState: LoadingState = AppInitialState.loading;
 
 const reducer = createReducer(
   initialState,
@@ -18,6 +17,6 @@ on(hide, () => {
   );
 
 
-export function loadingReducer(state: LoadingState, action: Action){
+export function loadingReducer(state: LoadingState, action){
   return reducer(state, action);
 }
