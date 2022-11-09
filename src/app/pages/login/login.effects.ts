@@ -1,7 +1,8 @@
-import { recoverPasswordFail } from './../../shared/store/login/login.actions';
+import { loginSuccess, loginFail } from './../../shared/store/login/login.actions';
 /* eslint-disable */
 import { AuthService } from 'src/app/services/auth.service';
-import { recoverPassword, recoverPasswordSuccess } from './../../shared/store/login/login.actions';
+import { recoverPassword, recoverPasswordSuccess, login, recoverPasswordFail } from './../../shared/store/login/login.actions';
+// import { login, recoverPasswordFail } from './../../shared/store/login/login.actions';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { pipe, of } from 'rxjs';
@@ -22,4 +23,14 @@ export class LoginEffects{
               catchError(error => of(recoverPasswordFail({error})))
             ))
        ))
+
+  login$ = createEffect(() => this.actions$
+          .pipe(
+            ofType(login),
+            switchMap((payload: {email: string, password: string}) => this.authService.onLogin(payload.email, payload.password)
+              .pipe(
+                map((user) => loginSuccess({user})),
+                catchError(error => of(loginFail({error})))
+              ))
+          ))
 }

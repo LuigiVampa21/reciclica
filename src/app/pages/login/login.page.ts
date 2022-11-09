@@ -115,7 +115,7 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   login(){
-    this.store.dispatch(login());
+    this.store.dispatch(login(this.form.value));
   }
 
   register(){
