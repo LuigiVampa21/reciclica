@@ -1,6 +1,7 @@
+/* eslint-disable arrow-body-style */
 import { switchMap, take } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { CanLoad, Route, UrlSegment, UrlTree } from '@angular/router';
+import { CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { AppState } from '../shared/store/AppState';
@@ -10,7 +11,7 @@ import { AppState } from '../shared/store/AppState';
 })
 export class AuthGuard implements CanLoad {
 
-    constructor(private store: Store<AppState>){ }
+    constructor(private store: Store<AppState>, private router: Router){ }
 
   canLoad(
     route: Route,
@@ -19,7 +20,11 @@ export class AuthGuard implements CanLoad {
         .pipe(
           take(1),
           switchMap(loginState => {
-            return of(loginState.isLoggedIn)
+            if(loginState.isLoggedIn){
+              return of(true);
+            }
+            this.router.navigateByUrl('login');
+            return of(false);
           })
         );
   }
