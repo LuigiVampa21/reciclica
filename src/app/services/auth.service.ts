@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../shared/models/user.model';
+import { User, UserRegister } from '../shared/models/user.model';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, setPersistence, signInWithEmailAndPassword, browserLocalPersistence } from 'firebase/auth';
 
@@ -39,6 +39,20 @@ export class AuthService {
           });
         });
       });
-      }
+    }
+
+  onRegister(user: UserRegister){
+    return new Observable<User>(observer => {
+        // .then(() => {
+          observer.next(user);
+          observer.complete();
+        });
+        // .catch((err) => {
+          // observer.error(err);
+          // observer.complete();
+    //     });
+    //   });
+    // });
+  }
 
 }

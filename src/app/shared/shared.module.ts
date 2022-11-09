@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { PickupCallCardComponent } from './components/pickup-call-card/pickup-call-card.component';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
-import { LoadingComponent } from './components/loading/loading.component';
 
 
 const components = [
