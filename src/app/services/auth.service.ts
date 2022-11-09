@@ -18,6 +18,7 @@ export class AuthService {
           observer.next();
           observer.complete();
         }).catch(err => {
+          console.log(err);
           observer.error(err);
           observer.complete();
         });

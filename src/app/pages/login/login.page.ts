@@ -26,16 +26,16 @@ export class LoginPage implements OnInit, OnDestroy {
               private formBuilder: FormBuilder,
               private store: Store<AppState>,
               private toastController: ToastController,
-              private authService: AuthService,
+              // private authService: AuthService,
              ) { }
 
   ngOnInit() {
     this.initForm();
     this.loginStateSub = this.store.select('login')
         .subscribe(loginState => {
-            this.onIsRecoveringPassword(loginState);
+            // this.onIsRecoveringPassword(loginState);
             this.onIsRecoveredPassword(loginState);
-            this.onIsLoggingIn(loginState);
+            // this.onIsLoggingIn(loginState);
             this.onIsLoggedIn(loginState);
             this.toggleLoading(loginState);
             this.onError(loginState);
@@ -57,18 +57,19 @@ export class LoginPage implements OnInit, OnDestroy {
     }
   }
 
-  onIsRecoveringPassword(loginState: LoginState){
-    if(loginState.isRecoveringPassword){
-    this.authService.recoverEmailPassword(this.form.get('email').value)
-        .subscribe(
-          result => {
-          this.store.dispatch(recoverPasswordSuccess());
-        },
-           error => {
-            this.store.dispatch(recoverPasswordFail({error}));
-          });
-    }
-  };
+  // onIsRecoveringPassword(loginState: LoginState){
+  //   if(loginState.isRecoveringPassword){
+  //   this.authService.recoverEmailPassword(this.form.get('email').value)
+  //       .subscribe(
+  //         result => {
+  //         this.store.dispatch(recoverPasswordSuccess());
+  //       },
+  //          error => {
+  //           this.store.dispatch(recoverPasswordFail({error}));
+  //         });
+  //   }
+  // };
+
   async onIsRecoveredPassword(loginState: LoginState){
     if(loginState.isRecoveredPassword){
     const toaster = await this.toastController.create({
@@ -91,21 +92,21 @@ export class LoginPage implements OnInit, OnDestroy {
       }
   }
 
-  onIsLoggingIn(loginState: LoginState){
-    if(loginState.isLoggingIn){
-      const email = this.form.get('email').value;
-      const password = this.form.get('password').value;
-      this.authService.onLogin(email, password)
-            .subscribe(
-              user => {
-              this.store.dispatch(loginSuccess({user}));
-            },
-              error => {
-              this.store.dispatch(loginFail({error}));
-            }
-            );
-    }
-  }
+  // onIsLoggingIn(loginState: LoginState){
+  //   if(loginState.isLoggingIn){
+  //     const email = this.form.get('email').value;
+  //     const password = this.form.get('password').value;
+  //     this.authService.onLogin(email, password)
+  //           .subscribe(
+  //             user => {
+  //             this.store.dispatch(loginSuccess({user}));
+  //           },
+  //             error => {
+  //             this.store.dispatch(loginFail({error}));
+  //           }
+  //           );
+  //   }
+  // }
 
   onIsLoggedIn(loginState: LoginState){
     if(loginState.isLoggedIn){
@@ -122,7 +123,8 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   forgotPassword(){
-    this.store.dispatch(recoverPassword());
+    console.log(this.form.get('email').value);
+    this.store.dispatch(recoverPassword({email: this.form.get('email').value}));
   }
 
   ngOnDestroy(): void {
