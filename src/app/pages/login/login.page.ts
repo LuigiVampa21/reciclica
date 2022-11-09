@@ -60,9 +60,13 @@ export class LoginPage implements OnInit, OnDestroy {
   onIsRecoveringPassword(loginState: LoginState){
     if(loginState.isRecoveringPassword){
     this.authService.recoverEmailPassword(this.form.get('email').value)
-        .subscribe(() => {
+        .subscribe(
+          result => {
           this.store.dispatch(recoverPasswordSuccess());
-        }, error => this.store.dispatch(recoverPasswordFail({error})));
+        },
+           error => {
+            this.store.dispatch(recoverPasswordFail({error}));
+          });
     }
   };
   async onIsRecoveredPassword(loginState: LoginState){
@@ -92,10 +96,11 @@ export class LoginPage implements OnInit, OnDestroy {
       const email = this.form.get('email').value;
       const password = this.form.get('password').value;
       this.authService.onLogin(email, password)
-            .subscribe(user => {
+            .subscribe(
+              user => {
               this.store.dispatch(loginSuccess({user}));
             },
-            error => {
+              error => {
               this.store.dispatch(loginFail({error}));
             }
             );
