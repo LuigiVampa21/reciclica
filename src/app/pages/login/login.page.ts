@@ -59,7 +59,6 @@ export class LoginPage implements OnInit, OnDestroy {
 
   onIsRecoveringPassword(loginState: LoginState){
     if(loginState.isRecoveringPassword){
-    // this.toggleLoading(loginState);
     this.authService.recoverEmailPassword(this.form.get('email').value)
         .subscribe(() => {
           this.store.dispatch(recoverPasswordSuccess());
@@ -68,7 +67,6 @@ export class LoginPage implements OnInit, OnDestroy {
   };
   async onIsRecoveredPassword(loginState: LoginState){
     if(loginState.isRecoveredPassword){
-    // this.toggleLoading(loginState);
     const toaster = await this.toastController.create({
       position: 'bottom',
       message: 'Recovery email sent',
@@ -80,7 +78,6 @@ export class LoginPage implements OnInit, OnDestroy {
 
   async onError(loginState: LoginState){
     if(loginState.error){
-      // this.toggleLoading(loginState);
       const toaster = await this.toastController.create({
         position: 'bottom',
         message: loginState.error.message,
