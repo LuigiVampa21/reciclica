@@ -92,24 +92,6 @@
         ></app-error-message>
 
         <ion-item>
-          <ion-label position="floating">Neighborhood</ion-label>
-          <ion-input formControlName="neighborhood" type="text"></ion-input>
-        </ion-item>
-        <app-error-message
-          *ngIf="form.get('address').get('neighborhood')?.touched && form.get('address').get('neighborhood')?.errors?.required"
-          [errorMessage]="'Neighborhood is required'"
-        ></app-error-message>
-
-        <ion-item>
-          <ion-label position="floating">Complement</ion-label>
-          <ion-input formControlName="complement" type="text"></ion-input>
-        </ion-item>
-        <app-error-message
-          *ngIf="form.get('address').get('complement')?.touched && form.get('address').get('complement')?.errors?.required"
-          [errorMessage]="'Complement is required'"
-        ></app-error-message>
-
-        <ion-item>
           <ion-label position="floating">ZIP</ion-label>
           <ion-input formControlName="zip" type="tel"></ion-input>
         </ion-item>
@@ -134,6 +116,15 @@
         <app-error-message
           *ngIf="form.get('address').get('city')?.touched && form.get('address').get('city')?.errors?.required"
           [errorMessage]="'City is required'"
+        ></app-error-message>
+
+        <ion-item>
+          <ion-label position="floating">Country</ion-label>
+          <ion-input formControlName="country" type="text"></ion-input>
+        </ion-item>
+        <app-error-message
+          *ngIf="form.get('address').get('country')?.touched && form.get('address').get('country')?.errors?.required"
+          [errorMessage]="'Country is required'"
         ></app-error-message>
       </ion-card-content>
     </ion-card>

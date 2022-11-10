@@ -6,7 +6,7 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
@@ -24,11 +24,11 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     ...AppStoreModule,
     StoreDevtoolsModule.instrument({maxAge: 25}),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    // provideFirestore(() => getFirestore()),
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig },
+    Geolocation,
   ],
   bootstrap: [AppComponent],
 })
