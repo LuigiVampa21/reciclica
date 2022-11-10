@@ -1,15 +1,17 @@
-import { AppState } from 'src/app/shared/store/AppState';
 /* eslint-disable id-blacklist */
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AppState } from 'src/app/shared/store/AppState';
 import { PasswordsMatchValidator } from 'src/app/shared/Validators/passwords-match.validator';
 import { select, Store } from '@ngrx/store';
 import { register } from 'src/app/shared/store/register/register.actions';
 import { RegisterState } from 'src/app/shared/store/register/RegisterState';
 import { hide, show } from 'src/app/shared/store/loading/loading.actions';
-import { ToastController } from '@ionic/angular';
+import { IonInput, ToastController } from '@ionic/angular';
 import { login } from 'src/app/shared/store/login/login.actions';
 
+// eslint-disable-next-line no-var
+declare var google;
 
 @Component({
   selector: 'app-register',
@@ -17,6 +19,8 @@ import { login } from 'src/app/shared/store/login/login.actions';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit, OnDestroy {
+
+  @ViewChild('autocomplete') autocomplete: IonInput;
 
   form: FormGroup;
   registerStateSub: any;
@@ -57,6 +61,25 @@ export class RegisterPage implements OnInit, OnDestroy {
       validators: [PasswordsMatchValidator('password','confirmPassword')],
       updateOn: 'blur'
   });
+  }
+
+ async ionViewDidEnter(){
+    try{
+      const ref = await this.autocomplete.getInputElement();
+      const autocomplete = new google.maps.places.Autocomplete(ref);
+      autocomplete.addListener('place_changed', () => {
+        console.log(autocomplete.getPlace());
+        this.form.setAddress(autocomplete.getPlace());
+      });
+    }catch(err){
+      console.log(err);
+    }
+    // this.autocomplete.getInputElement().then((ref: any) => {
+    //   const autocomplete = new google.maps.places.Autocomplete(ref);
+    //   autocomplete.addListener('place_changed', () => {
+    //     console.log(autocomplete.getPlace());
+    //   });
+    // });
   }
 
 

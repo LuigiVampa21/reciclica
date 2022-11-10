@@ -12,8 +12,10 @@ export const environment = {
     storageBucket: 'reciclica-d57d4.appspot.com',
     messagingSenderId: '488442934763',
     appId: '1:488442934763:web:f3361eb04edc5b0563d5ae',
-    measurementId: 'G-YNGF3M4V5V'
-  }
+    measurementId: 'G-YNGF3M4V5V',
+  },
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  API_KEY: 'AIzaSyBnO306mZcNMX4mLf1dCPUkGBg6DMrgHks',
 };
 
 /*

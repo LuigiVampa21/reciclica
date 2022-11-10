@@ -71,7 +71,11 @@
       <ion-card-content formGroupName="address">
         <ion-item>
           <ion-label position="floating">Address</ion-label>
-          <ion-input formControlName="street" type="text"></ion-input>
+          <ion-input
+            formControlName="street"
+            type="text"
+            #autocomplete
+          ></ion-input>
         </ion-item>
         <app-error-message
           *ngIf="form.get('address').get('street')?.touched && form.get('address').get('street')?.errors?.required"
